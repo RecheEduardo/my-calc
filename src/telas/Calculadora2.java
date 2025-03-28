@@ -28,7 +28,7 @@ public class Calculadora2  extends JFrame{
 	public Calculadora2() {
 		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		this.setTitle("Calculadora");
-		this.setBounds(500, 500, 245, 370);
+		this.setBounds(500, 500, 250, 370);
 		this.setLayout(null);
 		
 		this.display.setBounds   (  5, 5, 215, 40 );
@@ -60,9 +60,6 @@ public class Calculadora2  extends JFrame{
 	public void igual() {
 		if (( display.getText() != "") && (operador != "") && (valorAcumulado != "")) {
 			switch  (operador) {
-				case "+/-": {
-					display.setText(( Double.parseDouble(valorAcumulado) + Double.parseDouble(display.getText()))+"");
-				} break;
 				case "+": {
 					display.setText(( Double.parseDouble(valorAcumulado) + Double.parseDouble(display.getText()))+"");
 				} break;
@@ -107,6 +104,10 @@ public class Calculadora2  extends JFrame{
 		operador = "";
 	}
 	
+	public void trocaSinal() {
+		display.setText(Double.parseDouble(display.getText()) * -1 + "");
+	}
+	
 	public void addMemoria(String identificador) {
 		if(identificador == "M1") {
 			if(this.memoria1 != 0) {
@@ -131,8 +132,9 @@ public class Calculadora2  extends JFrame{
 	public String digito( String identificador ) {
 		switch (identificador) {
 			case "C": { zerarTudo(); } break;
-			case "M1": {addMemoria(identificador);} break;
-			case "M2": {addMemoria(identificador);} break;
+			case "M1": { addMemoria(identificador); } break;
+			case "M2": { addMemoria(identificador); } break;
+			case "+/-": { trocaSinal(); } break;
 			case "+": { execOperador(identificador); } break;
 			case "-": { execOperador(identificador); } break;
 			case "*": { execOperador(identificador); } break;
